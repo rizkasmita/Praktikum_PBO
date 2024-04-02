@@ -26,9 +26,11 @@ public class Member extends User {
     protected void pinjamKomik() throws IOException, InterruptedException {
         clear();
         System.out.println("=== PINJAM KOMIK ===");
+        boolean dapat = false;
         System.out.print("Masukkan judul komik: "); String jdlKom = input.readLine();
         for (Komik kom: DataKomik) {
             if (jdlKom.equals(kom.getJdl())) {
+                dapat = true;
             // if (kom.getJdl().equals(jdlKom)) {
                 // System.out.println("=== Comic Found ===");
                 // System.out.println(kom.getJdl());
@@ -41,9 +43,10 @@ public class Member extends User {
                     System.out.println(kom.pinjamKomik(kom.getJdl(), this.usn));
                     System.out.println("Stok tersisa: " + kom.pinjamKomik(kom.getJdl(), kom.getStok()));
                 }
-            } else {
-                System.out.println("=== Comic Not Found ===");
             }
+        }
+        if (dapat == false) {
+            System.out.println("=== Comic Not Found ===");
         }
         Thread.sleep(1000);
     }
@@ -115,7 +118,7 @@ public class Member extends User {
                 System.out.println(kom.getStok());
             }
         }
-        if (!dapat) {
+        if (dapat == false) {
             System.out.println("=== Comic Not Found ===");
         }
         Thread.sleep(1000);
